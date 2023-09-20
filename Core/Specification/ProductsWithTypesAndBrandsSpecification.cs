@@ -20,6 +20,8 @@ namespace Core.Specification
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
+            // AddInclude(c => c.CountryOfBirth);
+            // AddInclude("CountryOfOrigin.DefaultCountryLanguage")
         }
     }
 }

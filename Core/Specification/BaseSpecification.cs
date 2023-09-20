@@ -11,7 +11,12 @@ namespace Core.Specification
         public Expression<Func<T, bool>> Criteria {get;}
         public List<Expression<Func<T, object>>> Includes { get; } =
                new List<Expression<Func<T, object>>>();
+        public List<string> IncludeStrings { get; } = new List<string> ();
 
+        protected void AddInclude(string includeStrings)
+        {
+            IncludeStrings.Add(includeStrings);
+        }
 
         public BaseSpecification()
         {
