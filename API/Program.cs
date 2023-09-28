@@ -14,15 +14,20 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<StoreContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddApplicationServices();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocumentation();
-builder.Services.AddCors( opt =>
+// Add services to the container.
+builder.Services.AddCors(options =>
 {
-    opt.AddPolicy("CorsPolicy",policy =>{
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https//localhost:7200");
+    options.AddPolicy("AllowOrigin", builder =>
+    {
+        builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
     });
+
 });
+
 
 
 var app = builder.Build();
@@ -53,7 +58,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-app.UseCors("CorsPolicy");
+app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
 

@@ -17,7 +17,7 @@ namespace API.Controllers
         private readonly IMapper _mapper;
 
         public ProductsController(IGenericRepository<Product> productRepo,
-        IGenericRepository<ProductBrand> productBrandRepo, 
+        IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productType, IMapper mapper)
         {
             _mapper = mapper;
@@ -28,7 +28,7 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
-            [FromQuery]ProductSpecParams productParams)
+            [FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
             var countspec = new ProductWithFiltersForCountSpecification(productParams);
@@ -36,18 +36,18 @@ namespace API.Controllers
             var products = await _productRepo.ListAsync(spec);
 
             var data = _mapper
-                        .Map<IReadOnlyList<Product>,IReadOnlyList<ProductToReturnDto>>(products);
-            return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex,productParams.PageSize,totalItems,data));
+                        .Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+            return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse),StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productRepo.GetEntityWithSpec(spec);
-            if(product == null) return NotFound(new ApiResponse(404));
+            if (product == null) return NotFound(new ApiResponse(404));
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
 
