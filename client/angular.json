@@ -8,7 +8,13 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
-        }
+        },
+        "fileReplacements": [
+          {
+        "src": "src/environments/environment.prod.ts",
+        "with": "src/environments/environment.ts"
+          } 
+        ]
       },
       "root": "",
       "sourceRoot": "src",
@@ -33,8 +39,9 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
-            ],
+            ],  
             "scripts": []
           },
           "configurations": {
