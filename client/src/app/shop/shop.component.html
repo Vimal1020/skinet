@@ -24,8 +24,7 @@
                 <li class="list-group-item" *ngFor="let type of types"
                 [class.active]="type.id === this.shopParams.typeId"
                 [value]="type.id"
-                (click)="onTypeSelected(type.id)"
-                >
+                (click)="onTypeSelected(type.id)"d>
                     {{type.name}}
                 </li>
             </ul>
