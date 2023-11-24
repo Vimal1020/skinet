@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Core.Entities.OrderAggregate

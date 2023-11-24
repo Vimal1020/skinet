@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IBasket, IBasketItem } from '../shared/models/basket';
+import { IBasket, IBasketItem, IBasketTotals } from '../shared/models/basket';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -10,10 +10,12 @@ import { BasketService } from './basket.service';
 })
 export class BasketComponent implements OnInit{
 
+  basketTotals$:Observable<IBasketTotals | null>|undefined;
   basket$ : Observable<IBasket> | undefined;
 
   constructor(private basketService: BasketService){}
   ngOnInit(): void {
+    this.basketTotals$ = this.basketService.basketTotal$;
     this.basketService.basket$.subscribe(basket => {
       if (basket !== null) {
        

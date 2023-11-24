@@ -45,6 +45,9 @@ namespace Infrastructure.Data
                                         .HasConversion(new DateTimeOffsetToBinaryConverter());
                      }  
                 }
+                modelBuilder.Entity<Order>()
+                             .Property(o => o.PaymentIntentId)
+                                .IsRequired(false);
             }
         }
     }

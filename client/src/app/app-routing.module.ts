@@ -21,6 +21,12 @@ loadChildren: () => import('./checkout/checkout.module').then(mod => mod.Checkou
 , data: {breadcrumb:'Checkout'}},
 {path: 'account',loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule)
 , data: {breadcrumb:{skip: true}}},
+{
+  path: 'order',
+  canActivate: [AuthGuard],
+  loadChildren: () => import('./order/order.module').then(mod => mod.OrderModule)
+, data: {breadcrumb:{breadcrumb: 'Order'}}
+},
   {path: '**', redirectTo:'not-found', pathMatch:'full'}
 ];
 
