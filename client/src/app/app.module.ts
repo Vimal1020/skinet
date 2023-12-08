@@ -23,7 +23,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     HttpClientModule,
     CoreModule,
     HomeModule,
-    NgxSpinnerModule
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
               {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

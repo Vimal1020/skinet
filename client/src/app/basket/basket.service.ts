@@ -20,7 +20,27 @@ shipping = 0;
 constructor(private http:HttpClient) { }
 setShippingPrice(deliveryMethod: IDeliveryMethod){
   this.shipping = deliveryMethod.price;
-  this.calcularTotals();
+  const basket = this.getCurrentBasketValue();
+
+  if(basket?.deliveryMethodId){
+  basket.deliveryMethodId = deliveryMethod.id;
+  }
+
+  if (basket) {
+    basket.shippingPrice = deliveryMethod.price;
+    this.calcularTotals();
+    this.setBasket(basket);
+  }
+}
+
+createPaymentIntent(){
+  return this.http.post(this.baseUrl + 'payment/'+this.getCurrentBasketValue()?.id,{})
+    .pipe(
+      map((basket: IBasket) =>{
+          this.basketSource.next(basket);
+          console.log(this.getCurrentBasketValue());
+      })
+    );
 }
 
   getBasket(id:string){
@@ -28,6 +48,9 @@ setShippingPrice(deliveryMethod: IDeliveryMethod){
     .pipe(
       map((basket:IBasket) =>{
         this.basketSource.next(basket);
+        if (basket.shippingPrice !== undefined) {
+          this.shipping = basket.shippingPrice;
+        }
         this.calcularTotals();
       })
     );

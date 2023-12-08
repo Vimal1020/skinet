@@ -8,15 +8,15 @@ export class BusyService {
 busyRequestCount=0;
   constructor(private spinnerService:NgxSpinnerService) { }
 
-  busy()
-  {
+  busy() {
     this.busyRequestCount++;
-    this.spinnerService.show(undefined,{
+    this.spinnerService.show(undefined, {
       type: 'pacman',
-      bdColor:'rgba(255,255,255,0.7)',
-      color:'#333333'
+      bdColor: 'rgba(255,255,255,0.7)',
+      color: '#333333'
     });
   }
+  
 
   idle()
   {
