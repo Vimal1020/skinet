@@ -12,6 +12,8 @@ npm-debug.log
 yarn-error.log
 *.rdb
 
+/ssl
+
 # IDEs and editors
 .idea/
 .project
